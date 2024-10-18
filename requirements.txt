@@ -1,4 +1,4 @@
-asgiref==3.8.1
+staasgiref==3.8.1
 certifi==2024.8.30
 charset-normalizer==3.4.0
 cloudinary==1.41.0
