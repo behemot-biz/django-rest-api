@@ -125,6 +125,10 @@ re.IGNORECASE).group(0)
     CORS_ALLOWED_ORIGIN_REGEXES = [
         rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
     ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Allow requests from your local frontend
+    "https://behemot-biz-django-rest-api-918c07318b07.herokuapp.com/",  # Replace with your actual Heroku app URL
+]
 
 CORS_ALLOW_CREDENTIALS = True
 
