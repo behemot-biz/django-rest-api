@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import re
 from pathlib import Path
 import os
 import dj_database_url
@@ -65,7 +65,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # DEBUG = True
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+# ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1',  os.environ.get('ALLOWED_HOST')]
 
 # Application definition
 
@@ -110,14 +111,20 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if 'CLIENT_ORIGIN' in os.environ:
-     CORS_ALLOWED_ORIGINS = [
-         os.environ.get('CLIENT_ORIGIN')
-     ]
-else:
-     CORS_ALLOWED_ORIGIN_REGEXES = [
-         r"^https://.*\.gitpod\.io$",
-     ]
+# if 'CLIENT_ORIGIN' in os.environ:
+#      CORS_ALLOWED_ORIGINS = [
+#          os.environ.get('CLIENT_ORIGIN')
+#      ]
+# else:
+#      CORS_ALLOWED_ORIGIN_REGEXES = [
+#          r"^https://.*\.gitpod\.io$",
+#      ]
+if 'CLIENT_ORIGIN_DEV' in os.environ:
+    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), 
+re.IGNORECASE).group(0)
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
+    ]
 
 CORS_ALLOW_CREDENTIALS = True
 
