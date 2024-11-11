@@ -132,6 +132,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # Allow requests from your local frontend
     "https://behemot-biz-django-rest-api-918c07318b07.herokuapp.com",  # Replace with your actual Heroku app URL
+    "https://behemot-biz-moments-427f37189b40.herokuapp.com",  # Replace with your actual Heroku app URL
 ]
 
 CORS_ALLOW_CREDENTIALS = True
